@@ -429,7 +429,7 @@ npm run docs:dev
 
 ## Django
 
-###### 🖥️ Create Virtual Environment 🐍
+### 🖥️ Create Virtual Environment 🐍
 
 ```
 python -m venv trello_virtual_environment
@@ -441,13 +441,13 @@ python -m venv trello_virtual_environment
 trello_virtual_environment\Scripts\activate
 ```
 
-###### 🔧 Install Django 🦄
+### 🔧 Install Django 🦄
 
 ```
 pip install django
 ```
 
-###### 🛠️ Install Django Libraries 📚
+### 🛠️ Install Django Libraries 📚
 
 1 - 🌐 Django Rest Framework
 

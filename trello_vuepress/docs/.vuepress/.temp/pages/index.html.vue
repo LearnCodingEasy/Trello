@@ -215,16 +215,16 @@
 <hr>
 <hr>
 <h2 id="django" tabindex="-1"><a class="header-anchor" href="#django"><span>Django</span></a></h2>
-<h6 id="🖥️-create-virtual-environment-🐍" tabindex="-1"><a class="header-anchor" href="#🖥️-create-virtual-environment-🐍"><span>🖥️ Create Virtual Environment 🐍</span></a></h6>
+<h3 id="🖥️-create-virtual-environment-🐍" tabindex="-1"><a class="header-anchor" href="#🖥️-create-virtual-environment-🐍"><span>🖥️ Create Virtual Environment 🐍</span></a></h3>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">python -m venv trello_virtual_environment</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="🚀-activate-virtual-environment-🔋" tabindex="-1"><a class="header-anchor" href="#🚀-activate-virtual-environment-🔋"><span>🚀 Activate Virtual Environment 🔋</span></a></h6>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">trello_virtual_environment\Scripts\activate</span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="🔧-install-django-🦄" tabindex="-1"><a class="header-anchor" href="#🔧-install-django-🦄"><span>🔧 Install Django 🦄</span></a></h6>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="🔧-install-django-🦄" tabindex="-1"><a class="header-anchor" href="#🔧-install-django-🦄"><span>🔧 Install Django 🦄</span></a></h3>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">pip install django</span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="🛠️-install-django-libraries-📚" tabindex="-1"><a class="header-anchor" href="#🛠️-install-django-libraries-📚"><span>🛠️ Install Django Libraries 📚</span></a></h6>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="🛠️-install-django-libraries-📚" tabindex="-1"><a class="header-anchor" href="#🛠️-install-django-libraries-📚"><span>🛠️ Install Django Libraries 📚</span></a></h3>
 <p>1 - 🌐 Django Rest Framework</p>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">pip install djangorestframework</span>
 <span class="line"></span></code></pre>
