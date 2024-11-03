@@ -449,11 +449,146 @@ pip install django
 
 ###### 🛠️ Install Django Libraries 📚
 
-1 - 🌐 djangorestframework
-2 - 🔒 djangorestframework-simplejwt 🛡️
+1 - 🌐 Django Rest Framework
+
+```
+pip install djangorestframework
+```
+
+2 - 🔒 Django Rest Framework Simplejwt 🛡️
+
+```
+pip install djangorestframework-simplejwt
+```
+
 3 - 🌍 django-cors-headers 🔗
+
+```
+pip install django-cors-headers
+```
+
 4 - 🖼️ pillow 📷
 
 ```
-
+pip install pillow
 ```
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
