@@ -1173,6 +1173,8 @@ Password (again): ******
 Superuser created successfully.
 ```
 
+### 🚀 Run Server
+
 ###### 👉️ Go To
 
 ---
@@ -1353,4 +1355,72 @@ npm run build
 
 ```cmd
 npm run dev
+```
+
+### 📚 Vue Libraries
+
+###### 📚 Install Vue Libraries
+
+- 1️⃣ Tailwind
+
+```cmd
+npm install -D tailwindcss postcss autoprefixer
+```
+
+```cmd
+npx tailwindcss init -p
+```
+
+- 2️⃣ PrimeVue
+
+```cmd
+npm install primevue primeicons
+```
+
+```cmd
+npm install @primevue/themes
+```
+
+```cmd
+npm install quill
+```
+
+- 3️⃣ scss
+
+```cmd
+npm install -D sass@latest
+```
+
+- 4️⃣ Axios
+
+```cmd
+npm install axios
+```
+
+- 5️⃣ Font Awesome
+
+```cmd
+npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
+```
+
+- 6️⃣ Pwa
+
+```cmd
+npm install -D vite-plugin-pwa
+```
+
+- 7️⃣ Prism
+
+```cmd
+npm i prismjs
+```
+
+```cmd
+npm i vue-prism-component
+```
+
+- 8️⃣ Swiper
+
+```cmd
+npm i swiper
 ```
