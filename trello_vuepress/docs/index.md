@@ -1357,7 +1357,7 @@ npm run build
 npm run dev
 ```
 
-### 📚 Vue Libraries
+### 📚 Install Vue Libraries
 
 ###### 📚 Install Vue Libraries
 
@@ -1423,4 +1423,521 @@ npm i vue-prism-component
 
 ```cmd
 npm i swiper
+```
+
+### 📦 Setup Vue Libraries
+
+###### 1️⃣ Tailwind
+
+- Configure Tailwind
+
+- 📝 File [ tailwind.config.js ]
+
+```js
+// Page [ trello/trello_vue/tailwind.config.js ]
+export default defineConfig({
+  // ...
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"]
+  // ...
+});
+```
+
+- 📝 File [ main.css ]
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+###### - 2️⃣ PrimeVue
+
+- 📝 Create Page [ primeTheme.js ] Inside stores
+
+```
+primeTheme.js
+```
+
+```js
+// Page [ trello/trello_vue/src/stores/primeTheme.js ]
+
+import { reactive } from "vue";
+export default {
+  install: (app) => {
+    const _appState = reactive({ theme: "Aura", darkTheme: false });
+    app.config.globalProperties.$appState = _appState;
+  }
+};
+```
+
+- 📝 Create Page [ Theme/ThemeSwitcher.vue ] Inside components
+
+```
+Theme/ThemeSwitcher.vue
+```
+
+```html
+<template>
+  <span class="">
+    <ul class="flex list-none m-0 p-0 gap-2 items-center">
+      <li>
+        <button
+          type="button"
+          class="inline-flex w-8 h-8 p-0 items-center justify-center surface-0 dark:surface-800 border border-surface-200 dark:border-surface-600 rounded-full"
+          @click="onThemeToggler"
+        >
+          <i :class="`dark:text-white pi ${iconClass}`" />
+        </button>
+      </li>
+    </ul>
+  </span>
+</template>
+```
+
+```js
+<script>
+  import { updatePreset, updateSurfacePalette } from '@primevue/themes'
+
+  export default {
+    data() {
+      return {
+        iconClass: 'pi-moon',
+        selectedPrimaryColor: 'noir',
+        selectedSurfaceColor: null
+      }
+    },
+    methods: {
+      onThemeToggler() {
+        const root = document.getElementsByTagName('html')[0]
+        root.classList.toggle('p-dark')
+        this.iconClass = this.iconClass === 'pi-moon' ? 'pi-sun' : 'pi-moon'
+      },
+
+      updateColors(type, color) {
+        if (type === 'primary') this.selectedPrimaryColor = color.name
+        else if (type === 'surface') this.selectedSurfaceColor = color.name
+
+        this.applyTheme(type, color)
+      },
+      applyTheme(type, color) {
+        if (type === 'primary') {
+          updatePreset(this.getPresetExt())
+        } else if (type === 'surface') {
+          updateSurfacePalette(color.palette)
+        }
+      },
+      onRippleChange(value) {
+        this.$primevue.config.ripple = value
+      }
+    },
+    computed: {
+      rippleActive() {
+        return this.$primevue.config.ripple
+      }
+    }
+  }
+</script>
+```
+
+- 📝 Create Page [ presets/Noir.js ] Inside src
+
+```
+presets/Noir.js
+```
+
+```js
+import { definePreset } from "@primevue/themes";
+import Aura from "@primevue/themes/aura";
+
+const Noir = definePreset(Aura, {
+  semantic: {
+    primary: {
+      50: "{surface.50}",
+      100: "{surface.100}",
+      200: "{surface.200}",
+      300: "{surface.300}",
+      400: "{surface.400}",
+      500: "{surface.500}",
+      600: "{surface.600}",
+      700: "{surface.700}",
+      800: "{surface.800}",
+      900: "{surface.900}",
+      950: "{surface.950}"
+    },
+    colorScheme: {
+      light: {
+        primary: {
+          color: "{primary.950}",
+          contrastColor: "#ffffff",
+          hoverColor: "{primary.900}",
+          activeColor: "{primary.800}"
+        },
+        highlight: {
+          background: "{primary.950}",
+          focusBackground: "{primary.700}",
+          color: "#ffffff",
+          focusColor: "#ffffff"
+        }
+      },
+      dark: {
+        primary: {
+          color: "{primary.50}",
+          contrastColor: "{primary.950}",
+          hoverColor: "{primary.100}",
+          activeColor: "{primary.200}"
+        },
+        highlight: {
+          background: "{primary.50}",
+          focusBackground: "{primary.300}",
+          color: "{primary.950}",
+          focusColor: "{primary.950}"
+        }
+      }
+    }
+  }
+});
+
+export default Noir;
+```
+
+###### - 3️⃣ scss
+
+###### - 4️⃣ Axios
+
+```js
+// Axios  Import
+// Axios  استيراد
+import axios from "axios";
+axios.defaults.baseURL = "http://127.0.0.1:8000";
+
+app.use(router, axios);
+```
+
+###### - 5️⃣ Font Awesome
+
+```js
+// Page [ trello/trello_vue/src/main.js ]
+
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+// Add Free Icons Styles To SVG Core
+library.add(fas, far, fab);
+
+// eslint-disable-next-line vue/multi-word-component-names
+app.component("fa", FontAwesomeIcon);
+```
+
+###### - 6️⃣ Pwa
+
+- 📝 Edit Page [ vite.config.js ]
+
+```js
+import { fileURLToPath, URL } from "node:url";
+
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+
+// For Pwa
+// https://vite-pwa-org.netlify.app/guide/
+import { VitePWA } from "vite-plugin-pwa";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    // For Pwa
+    VitePWA({
+      registerType: "autoUpdate",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        clientsClaim: true,
+        skipWaiting: true,
+        cleanupOutdatedCaches: false,
+        offlineGoogleAnalytics: true,
+        sourcemap: true,
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) =>
+              request.destination === "document" ||
+              request.destination === "script" ||
+              request.destination === "style" ||
+              request.destination === "image" ||
+              request.destination === "font",
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "assets-cache",
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30
+              }
+            }
+          }
+        ]
+      },
+      devOptions: {
+        enabled: true
+      },
+      injectRegister: "auto",
+      includeAssets: ["**/*"],
+      manifest: {
+        name: "Script Youtube",
+        short_name: "Script Youtube",
+        description: "My Awesome App Script Youtube",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "./images/icons/script_youtube_icon_72x72.png",
+            type: "image/png",
+            sizes: "72x72",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_96x96.png",
+            type: "image/png",
+            sizes: "96x96",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_128x128.png",
+            type: "image/png",
+            sizes: "128x128",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_144x144.png",
+            type: "image/png",
+            sizes: "144x144",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_152x152.png",
+            type: "image/png",
+            sizes: "152x152",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_192x192.png",
+            type: "image/png",
+            sizes: "192x192",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_384x384.png",
+            type: "image/png",
+            sizes: "384x384",
+            purpose: "any maskable"
+          },
+          {
+            src: "./images/icons/script_youtube_icon_512x512.png",
+            type: "image/png",
+            sizes: "512x512",
+            purpose: "any maskable"
+          }
+        ],
+        screenshots: [
+          {
+            src: "./images/screenshots/screenshots.png",
+            sizes: "640x480",
+            type: "image/png",
+            form_factor: "wide"
+            // "form_factor": "narrow"
+          }
+        ]
+      }
+    })
+  ],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url))
+    }
+  }
+});
+```
+
+- 🖼️ Add Image Inside Public
+
+```
+├── public/
+│   ├── images/
+│   |   ├── icons/
+│   │   |   ├── 🖼️ trello_icon_72x72.png
+│   │   |   ├── 🖼️ trello_icon_96x96.png
+│   │   |   ├── 🖼️ trello_icon_128x128.png
+│   │   |   ├── 🖼️ trello_icon_144x144.png
+│   │   |   ├── 🖼️ trello_icon_152x152.png
+│   │   |   ├── 🖼️ trello_icon_192x192.png
+│   │   |   ├── 🖼️ trello_icon_384x384.png
+│   │   |   ├── 🖼️ trello_icon_512x512.png
+│   |   ├── screenshots/
+│   │   |   ├── 🖼️ screenshots.png
+```
+
+###### 👉️ Go To Website To Resize Image
+
+```
+https://www.iloveimg.com/resize-image
+```
+
+###### - 7️⃣ Prism
+
+###### - 8️⃣ Swiper
+
+###### - 9️⃣ Pinia
+
+- 🧞‍♂️ User Store
+- 📝 Create Page [ user.js ] Inside Stores
+
+```
+user.js
+```
+
+```js
+// Page [ trello/trello_vue/src/stores/user.js ]
+import { defineStore } from "pinia";
+import axios from "axios";
+export const useUserStore = defineStore({
+  id: "user",
+  state: () => ({
+    user: {
+      isAuthenticated: false,
+      id: null,
+      name: null,
+      surname: null,
+      email: null,
+      date_of_birth: null,
+      access: null,
+      refresh: null,
+      friends_count: 0,
+      // User gender 👤
+      gender: null,
+      // 🖼️ Profile picture
+      // 🖼 صورة الملف الشخصي
+      avatar: null,
+      // 🖼️ Cover photo
+      // 🖼️ صورة الغلاف
+      cover: null,
+      // 📋 Number of tasks
+      // 📋 عدد المهام
+      task_count: 0
+    }
+  }),
+  actions: {
+    // 🔄 Initialize the store
+    // 🔄 تهيئة المخزن
+    initStore() {
+      if (localStorage.getItem("user.access")) {
+        console.log("User has access!");
+        this.user.isAuthenticated = true;
+        this.user.id = localStorage.getItem("user.id");
+        this.user.name = localStorage.getItem("user.name");
+        this.user.surname = localStorage.getItem("user.surname");
+        this.user.email = localStorage.getItem("user.email");
+        this.user.date_of_birth = localStorage.getItem("user.date_of_birth");
+        this.user.gender = localStorage.getItem("user.gender");
+        this.user.avatar = localStorage.getItem("user.avatar");
+        this.user.cover = localStorage.getItem("user.cover");
+        this.user.access = localStorage.getItem("user.access");
+        this.user.refresh = localStorage.getItem("user.refresh");
+        this.refreshToken();
+        this.user.friends_count = localStorage.getItem("user.friends_count");
+        this.user.task_count = localStorage.getItem("user.task_count");
+      }
+    },
+    // 🔑 Set access and refresh tokens
+    // 🔑 إعداد رموز الوصول والتحديث
+    setToken(data) {
+      console.log("setToken", data);
+      this.user.access = data.access;
+      this.user.refresh = data.refresh;
+      this.user.isAuthenticated = true;
+      localStorage.setItem("user.access", data.access);
+      localStorage.setItem("user.refresh", data.refresh);
+
+      console.log("user.access: ", localStorage.getItem("user.access"));
+    },
+    // ❌ Remove tokens and clear user data
+    // ❌ إزالة الرموز ومسح بيانات المستخدم
+    removeToken() {
+      console.log("removeToken");
+      this.user.refresh = null;
+      this.user.access = null;
+      this.user.isAuthenticated = false;
+      this.user.id = null;
+      this.user.name = null;
+      this.user.surname = null;
+      this.user.email = null;
+      this.user.date_of_birth = null;
+      this.user.gender = null;
+      this.user.avatar = null;
+      this.user.cover = null;
+      this.user.friends_count = null;
+      this.user.task_count = null;
+
+      localStorage.setItem("user.access", "");
+      localStorage.setItem("user.refresh", "");
+      localStorage.setItem("user.id", "");
+      localStorage.setItem("user.name", "");
+      localStorage.setItem("user.surname", "");
+      localStorage.setItem("user.email", "");
+      localStorage.setItem("user.date_of_birth", "");
+      localStorage.setItem("user.gender", "");
+      localStorage.setItem("user.avatar", "");
+      localStorage.setItem("user.cover", "");
+      localStorage.setItem("user.friends_count", "");
+      localStorage.setItem("user.task_count", "");
+    },
+    // ✍️ Set user info in state and localStorage
+    // ✍️ تعيين بيانات المستخدم في الحالة و localStorage
+    setUserInfo(user) {
+      console.log("setUserInfo", user);
+      this.user.id = user.id;
+      this.user.name = user.name;
+      this.user.surname = user.surname;
+      this.user.email = user.email;
+      this.user.date_of_birth = user.date_of_birth;
+      this.user.gender = user.gender;
+      this.user.avatar = user.avatar;
+      this.user.cover = user.cover;
+      this.user.friends_count = user.friends_count;
+      this.user.task_count = user.task_count;
+      localStorage.setItem("user.id", this.user.id);
+      localStorage.setItem("user.name", this.user.name);
+      localStorage.setItem("user.surname", this.user.surname);
+      localStorage.setItem("user.email", this.user.email);
+      localStorage.setItem("user.date_of_birth", this.user.date_of_birth);
+      localStorage.setItem("user.gender", this.user.gender);
+      localStorage.setItem("user.avatar", this.user.avatar);
+      localStorage.setItem("user.cover", this.user.cover);
+      localStorage.setItem("user.friends_count", this.user.friends_count);
+      localStorage.setItem("user.task_count", this.user.task_count);
+    },
+    // 🔄 Refresh access token
+    // 🔄 تحديث رمز الوصول
+    refreshToken() {
+      axios
+        .post("/api/refresh/", {
+          refresh: this.user.refresh
+        })
+        .then((response) => {
+          this.user.access = response.data.access;
+          localStorage.setItem("user.access", response.data.access);
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.access;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.removeToken();
+        });
+    }
+  }
+});
+```
+
+```
+
 ```
