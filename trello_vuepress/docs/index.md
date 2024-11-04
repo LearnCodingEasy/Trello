@@ -1334,3 +1334,23 @@ Done. Now run:
   npm run build
   npm run dev
 ```
+
+```cmd
+cd trello_vue
+```
+
+```cmd
+npm install
+```
+
+```cmd
+npm run format
+```
+
+```cmd
+npm run build
+```
+
+```cmd
+npm run dev
+```
